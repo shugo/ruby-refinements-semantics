@@ -6,8 +6,7 @@ activation of refinements in a cref and the algebraic laws of `refined`
 introduced by the revised design in
 [shugo/ruby#132](https://github.com/shugo/ruby/pull/132) (zero-argument
 application returns the receiver; chained application behaves like a single
-application of the concatenated module sequence).  The method was called
-`Proc#with_refinements` earlier in the proposal's history.
+application of the concatenated module sequence).
 
 Everything lives in a single file, [`refinements.v`](refinements.v), which
 depends only on the Coq standard library:
