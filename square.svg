@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 250" role="img" aria-labelledby="title">
+  <title id="title">Commutative square: refined (close b rho) S = close b (extend rho S)</title>
+  <style>
+    svg { color: #1f2328; }
+    @media (prefers-color-scheme: dark) { svg { color: #e6edf3; } }
+    text { fill: currentColor; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 15px; }
+    .ann { fill: #848d97; font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 13px; }
+    line { stroke: currentColor; stroke-width: 1.2; }
+    .head { fill: currentColor; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="head" d="M 0 0 L 10 5 L 0 10 z"/>
+    </marker>
+  </defs>
+
+  <!-- vertices -->
+  <text x="150" y="60" text-anchor="middle">rho</text>
+  <text x="470" y="60" text-anchor="middle">close b rho</text>
+  <text x="150" y="200" text-anchor="middle">extend rho S</text>
+  <text x="470" y="200" text-anchor="middle">close b (extend rho S)</text>
+
+  <!-- top arrow: close b -->
+  <line x1="185" y1="55" x2="385" y2="55" marker-end="url(#arrow)"/>
+  <text x="285" y="45" text-anchor="middle">close b</text>
+
+  <!-- bottom arrow: close b -->
+  <line x1="215" y1="195" x2="355" y2="195" marker-end="url(#arrow)"/>
+  <text x="285" y="220" text-anchor="middle">close b</text>
+
+  <!-- left arrow: extend _ S (using) -->
+  <line x1="150" y1="75" x2="150" y2="180" marker-end="url(#arrow)"/>
+  <text x="138" y="122" text-anchor="end">extend _ S</text>
+  <text x="138" y="141" text-anchor="end" class="ann">(using)</text>
+
+  <!-- right arrow: refined _ S -->
+  <line x1="470" y1="75" x2="470" y2="180" marker-end="url(#arrow)"/>
+  <text x="482" y="122" text-anchor="start">refined _ S</text>
+  <text x="482" y="141" text-anchor="start" class="ann">(Proc#refined)</text>
+</svg>

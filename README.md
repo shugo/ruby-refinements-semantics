@@ -36,6 +36,12 @@ visibility, the `using`-in-body rejection, Ractor concerns, and the
 lexical scoping of `using` itself.  The model captures what a refined
 proc *means*, not how the implementation caches it.
 
+`refined` is the closure-level lift of the `using` action on
+environments: the `square` theorem below states that this diagram
+commutes.
+
+![Commutative square relating using and refined](square.svg)
+
 ## Theorems
 
 Statements marked **[PR #132]** hold only under the revised design.  In
