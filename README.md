@@ -1,6 +1,6 @@
 # ruby-refinements-semantics
 
-A small Coq formalization of the semantics of Ruby's `Proc#refined`
+A small Rocq Prover formalization of the semantics of Ruby's `Proc#refined`
 ([Feature #22097](https://bugs.ruby-lang.org/issues/22097)), covering the
 activation of refinements in a cref and the algebraic laws of `refined`
 introduced by the revised design in
@@ -9,7 +9,7 @@ application returns the receiver; chained application behaves like a single
 application of the concatenated module sequence).
 
 Everything lives in a single file, [`refinements.v`](refinements.v), which
-depends only on the Coq standard library:
+depends only on the Rocq standard library:
 
 ```console
 $ coqc refinements.v
