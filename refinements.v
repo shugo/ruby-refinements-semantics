@@ -11,8 +11,8 @@
    of the captured cref); iseq copies, memoization and visibility are
    outside its scope.
 
-   Theorems marked [PR #132] state properties that hold only with the
-   revised design of github.com/shugo/ruby/pull/132, which permits
+   Theorems marked [PR #18052] state properties that hold only with the
+   revised design of github.com/ruby/ruby/pull/18052, which permits
    zero-argument application (returning the receiver) and chained
    application.  Under the original design both were rejected with
    ArgumentError, so `refined` was a partial function: the marked
@@ -43,9 +43,9 @@ Definition activate (T : table) (m : M) : table :=
 Definition apply_seq (T : table) (w : list M) : table :=
   fold_left activate w T.
 
-(* [PR #132]  Staged activation equals one-shot activation of the
+(* [PR #18052]  Staged activation equals one-shot activation of the
    concatenated sequence.  The fold identity itself is a stock fact
-   (fold_left_app); what depends on PR #132 is its reading: it is the
+   (fold_left_app); what depends on PR #18052 is its reading: it is the
    semantic claim that stacking new modules on the receiver's cref
    (the chained implementation) coincides with applying the
    concatenated sequence to the captured cref in one call.  Without
@@ -112,7 +112,7 @@ Definition extend (rho : env) (S : list M) : env := rho ++ S.
    Non-mutating by construction.  NOTE: modelled as a total function;
    the original design's domain restrictions (rejecting S = [] and
    already-refined receivers) are not represented, so each theorem
-   below states explicitly whether it needs PR #132. *)
+   below states explicitly whether it needs PR #18052. *)
 Definition refined (p : closure) (S : list M) : closure :=
   let (b, rho) := p in (b, extend rho S).
 
@@ -126,7 +126,7 @@ Theorem square : forall (b : B) (rho : env) (S : list M),
   refined (close b rho) S = close b (extend rho S).
 Proof. reflexivity. Qed.
 
-(* [PR #132]  Unit law.  Requires zero-argument application; the
+(* [PR #18052]  Unit law.  Requires zero-argument application; the
    original design rejected refined() with ArgumentError, so this
    statement had no defined left-hand side.  Note the proof needs
    app_nil_r: the law is propositional, not definitional, mirroring
@@ -136,7 +136,7 @@ Proof.
   intros [b rho]. unfold refined, extend. now rewrite app_nil_r.
 Qed.
 
-(* [PR #132]  Associativity (compatibility) law.  Requires chained
+(* [PR #18052]  Associativity (compatibility) law.  Requires chained
    application; the original design rejected refined on an
    already-refined receiver, so the left-hand side was undefined. *)
 Theorem refined_assoc : forall (p : closure) (S1 S2 : list M),
@@ -163,7 +163,7 @@ Qed.
 Definition table_of (p : closure) (T0 : table) : table :=
   apply_seq T0 (snd p).
 
-(* [PR #132]  Chained and one-shot refined procs yield the same
+(* [PR #18052]  Chained and one-shot refined procs yield the same
    dispatch table.  Requires chaining to be defined at all; with it,
    the equality is immediate from refined_assoc. *)
 Corollary chained_table : forall (p : closure) (S1 S2 : list M) T0,
@@ -175,7 +175,7 @@ Qed.
 
 (* Behavior depends only on the equivalence class of the captured
    sequence: equivalent sequences give equal dispatch at every key.
-   Independent of PR #132. *)
+   Independent of PR #18052. *)
 Corollary table_respects_equiv : forall (b : B) (w1 w2 : list M) T0 k,
   seq_equiv w1 w2 ->
   table_of (close b w1) T0 k = table_of (close b w2) T0 k.

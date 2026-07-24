@@ -4,7 +4,7 @@ A small Rocq Prover formalization of the semantics of Ruby's `Proc#refined`
 ([Feature #22097](https://bugs.ruby-lang.org/issues/22097)), covering the
 activation of refinements in a cref and the algebraic laws of `refined`
 introduced by the revised design in
-[shugo/ruby#132](https://github.com/shugo/ruby/pull/132) (zero-argument
+[ruby/ruby#18052](https://github.com/ruby/ruby/pull/18052) (zero-argument
 application returns the receiver; chained application behaves like a single
 application of the concatenated module sequence).
 
@@ -44,13 +44,13 @@ commutes.
 
 ## Theorems
 
-Statements marked **[PR #132]** hold only under the revised design.  In
+Statements marked **[PR #18052]** hold only under the revised design.  In
 the original one-shot design `refined` was a partial function
 (zero-argument and chained calls raised `ArgumentError`), so their
 left-hand sides were undefined.  Unmarked statements already hold for
 the original design.
 
-| Theorem | Statement | Needs PR #132 |
+| Theorem | Statement | Needs PR #18052 |
 | --- | --- | --- |
 | `staged_eq_oneshot` | Activating `a ++ b` equals activating `a`, and then `b` on the result | yes (the fold identity is stock; its staged reading requires chaining) |
 | `lookup_apply_seq` | Dispatch after activating `w` finds the *last* module in `w` refining the key, else falls through | no |
