@@ -3,3 +3,5 @@
 *.vos
 *.glob
 .*.aux
+*.crashcoqide
+\#*\#
