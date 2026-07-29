@@ -86,15 +86,20 @@ the original design.
 | `refined_assoc` | `p.refined(a).refined(b)` behaves like `p.refined(a, b)` |
 | `seq_equiv` | procs whose crefs activate the same refinements are indistinguishable by dispatch |
 
-The implementation copies the block's iseq for each refined proc, and
-memoizes one copy per source iseq, keyed by the receiver's captured
-cref and the module arguments.  A chained call is not memoized: its
-source is itself a copy, and memo entries are retained for the VM's
-lifetime, so caching them would grow the memo without bound.  A
-performance warning is emitted for such a call under
+The implementation copies the block's iseq so that the copy can
+resolve methods through the refinements without affecting the original
+proc.  The copy is deferred until the refined proc's first call and
+memoized, one copy per source iseq, keyed by the captured cref of the
+proc the block came from and the accumulated module sequence -- the
+key is exactly a point of the acting monoid.  By the associativity
+law, `p.refined(a).refined(b)` and `p.refined(a, b)` name the same
+point, so they share one memoized copy; a proc that is never called
+is never copied.  Only a proc whose block is itself a copy, such as
+one obtained by chaining from a proc that has already been called, is
+not memoized, since memo entries are retained for the VM's lifetime;
+a performance warning is emitted for such a call under
 `Warning[:performance] = true`.
 
-`p.refined(a).refined(b)` and `p.refined(a, b)` therefore produce
-*distinct* copies with equal behavior: the model's equalities
-correspond to observational equivalence of procs, not object identity
--- except `refined()`, which returns the receiver itself.
+The model's equalities correspond to observational equivalence of
+procs, not object identity -- except `refined()`, which returns the
+receiver itself.
